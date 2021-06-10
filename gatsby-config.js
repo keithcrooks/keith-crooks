@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: "Keith Crooks",
+    description: "My own personal website",
   },
   plugins: [
     "gatsby-plugin-gatsby-cloud",
