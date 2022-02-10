@@ -2,6 +2,16 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+const contentfulConfig = {
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  spaceId: process.env.CONTENTFUL_SPACE_ID,
+};
+
+if (process.env.CONTENTFUL_HOST && process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN) {
+  contentfulConfig.host = process.env.CONTENTFUL_HOST;
+  contentfulConfig.accessToken = process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN;
+}
+
 module.exports = {
   siteMetadata: {
     title: "Keith Crooks",
@@ -14,18 +24,7 @@ module.exports = {
     "gatsby-plugin-mdx",
     {
       resolve: `gatsby-source-contentful`,
-      options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-      }
-    },
-    {
-      resolve: `gatsby-source-contentful`,
-      options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN,
-        host: process.env.CONTENTFUL_HOST,
-      },
+      options: contentfulConfig,
     },
     {
       resolve: "gatsby-source-filesystem",
